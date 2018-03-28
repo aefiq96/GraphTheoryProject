@@ -4,10 +4,13 @@ import(
 	"fmt"
 )
 
-func intopost(infix)string{
-	postfix := ""
+func intopost(infix string)string{
+	specials := map[rune]int{'*': 10, '.':9, '|':8}
 
-	return postfix
+	pofix := []rune{}
+	s := []rune{}
+
+	return string (pofix)
 }
 
 func main(){
@@ -15,5 +18,5 @@ func main(){
 	fmt.Println("Infix: ","a.b.c*");
 	fmt.Println("Postifx: ",intopost("a.b.c*"))
 
-	//////
+	//
 }
