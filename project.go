@@ -15,5 +15,5 @@ func main(){
 	fmt.Println("Infix: ","a.b.c*");
 	fmt.Println("Postifx: ",intopost("a.b.c*"))
 
-	
+	//////
 }
