@@ -51,7 +51,11 @@ func readInput() (string, error){
 func main(){
 	//declaring variables
 	var i int 
-	//list of options for user to enter
+	forLoop := true
+
+	for forLoop{
+
+		//list of options for user to enter
 	fmt.Print("Please Select 1\n")
 	fmt.Print("select 1 for Infix To PostFix\n")
 	fmt.Print("select 2 for PostFix\n")
@@ -88,7 +92,10 @@ func main(){
 		readStr, err := readInput()
 
 		fmt.Println(nfa.Pomatch(readInfix,readStr))	
+	default:
+		forLoop = false
 	}
 
+	}
 }
 
