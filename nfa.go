@@ -67,6 +67,24 @@ func pomatch (po string, s string)bool{
     ismatch := false
     ponfa := potegtonfa(po)
 
+    current := []*state{}
+    next    := []*state{}
+
+    for _, r := range s{
+        for _, c := range current{
+            if c.symboll == r{
+
+            }
+        }
+        current, next := next, []*state{}
+    }
+
+    for _, c := range current{
+        if c == ponfa.accept{
+            ismatch = true
+            break
+        }
+    }
 
 
     return ismatch
