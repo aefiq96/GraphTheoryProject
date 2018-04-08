@@ -2,6 +2,7 @@ package main
 
 import(
 	"fmt"
+	nfa "./src"
 )
 
 func intopost(infix string)string{
@@ -40,6 +41,5 @@ func main(){
 	//Answer: ab.c*
 	fmt.Println("Infix: ","a.b.c*");
 	fmt.Println("Postifx: ",intopost("a.b.c*"))
-
-	//
+    fmt.Println(nfa.Pomatch("ab.c*|","cccc"))	
 }
