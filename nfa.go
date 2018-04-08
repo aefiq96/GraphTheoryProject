@@ -66,10 +66,14 @@ func poregtonfa(pofix string) *nfa {
 func addState (l []*state, s *state, a *state) []*state{
     l = append(l, s)
 
-    if s.symbol == 0 {
+    if s != a && s.symbol == 0 {
         l = addState(l, s.edge1, a)
+        //other programming language it would be null but in GO it's nil
+        if s.edge2 != nil{
+            l = addState(l, s.edge2, a)
+        }
     }
-    
+    return l
 }
 
 func pomatch (po string, s string)bool{
@@ -84,7 +88,7 @@ func pomatch (po string, s string)bool{
     for _, r := range s{
         for _, c := range current{
             if c.symbol == r{
-                next = addState(next[:], s.edge1, ponfa.accept)
+                next = addState(next[:], c.edge1, ponfa.accept)
             }
         }
         current, next := next, []*state{}
