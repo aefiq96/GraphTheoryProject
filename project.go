@@ -1,6 +1,9 @@
 package main 
 
 import(
+	"bufio"
+	"os"
+	"strings"
 	"fmt"
 	nfa "./src"
 )
@@ -37,9 +40,43 @@ func intopost(infix string)string{
 	return string (pofix)
 }
 
+func readInput() (string, error){
+	reader := bufio.NewReader(os.Stdin)
+	str,err := reader.ReadString('\n')
+
+	return strings.TrimSpace(str),err
+}
+
 func main(){
 	//Answer: ab.c*
-	fmt.Println("Infix: ","a.b.c*");
-	fmt.Println("Postifx: ",intopost("a.b.c*"))
-    fmt.Println(nfa.Pomatch("ab.c*|","cccc"))	
+	
+	//user option
+	var i int 
+
+	fmt.Print("Please Select 1\n")
+	fmt.Print("select 1 for Infix To PostFix\n")
+	fmt.Print("select 2 for PostFix\n")
+
+	fmt.Scanln(&i)
+	switch i{
+	case 1:
+		fmt.Print("Enter infix: ");
+		readInfix, err := readInput()
+
+		if err != nil{
+			return
+		}
+		fmt.Println("Infix: ",readInfix)
+		fmt.Println("Postfix: ",intopost(readInfix))
+
+		//save 
+		post := intopost(readInfix)
+
+		fmt.Print("Enter the string you would like to match: ");
+		readStr, err := readInput()
+
+		fmt.Println(nfa.Pomatch(post,readStr))	
+	}
+
 }
+
