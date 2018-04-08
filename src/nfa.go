@@ -53,7 +53,25 @@ nfaStack := []*nfa{}
 			frag.accept.edge1 = frag.initial
 			frag.accept.edge2 = &accept
 
-			nfaStack = append(nfaStack, &nfa{initial: &initial, accept: &accept})       
+			nfaStack = append(nfaStack, &nfa{initial: &initial, accept: &accept}) 
+         case '+':
+            frag := nfaStack[len(nfaStack)-1]
+            nfaStack = nfaStack[:len(nfaStack)-1]
+
+            accept := state{}
+            initial := state{edge1: frag.initial, edge2: &accept}
+
+            frag.accept.edge1 = &initial
+            frag.accept.edge2 = &accept
+
+            nfaStack = append(nfaStack, &nfa{initial: frag.initial, accept: &accept}) 
+        case '?':
+            frag := nfaStack[len(nfaStack)-1]
+            nfaStack = nfaStack[:len(nfaStack)-1]
+
+            initial := state{edge1: frag.initial, edge2: frag.accept}
+
+            nfaStack = append(nfaStack, &nfa{initial: &initial, accept: frag.accept}) 
         default:    
             accept := state{}
             initial := state{symbol: r,edge1: &accept}

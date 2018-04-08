@@ -9,7 +9,7 @@ import(
 )
 //intopost function
 func intopost(infix string)string{
-	specials := map[rune]int{'*': 10, '.': 9, '|': 8}
+	specials := map[rune]int{'*': 10, '.': 9, '|': 8, '+':9, '?':9}
 
 	pofix := []rune{}
 	s := []rune{}
