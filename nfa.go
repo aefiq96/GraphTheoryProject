@@ -63,6 +63,15 @@ func poregtonfa(pofix string) *nfa {
     return nfastack[0]
 }
 
+func addState (l []*state, s *state, a *state) []*state{
+    l = append(l, s)
+
+    if s.symbol == 0 {
+        l = addState(l, s.edge1, a)
+    }
+    
+}
+
 func pomatch (po string, s string)bool{
     ismatch := false
     ponfa := poregtonfa(po)
