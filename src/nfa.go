@@ -13,8 +13,9 @@ type nfa struct{
     initial *state
     accept  *state
 }
-
+//postfix regular expression function
 func poregtonfa(pofix string) *nfa { 
+//creating a stack
 nfaStack := []*nfa{}
 	for _, r := range pofix {
 		switch r {
@@ -60,12 +61,13 @@ nfaStack := []*nfa{}
             nfaStack = append(nfaStack, &nfa{initial: &initial, accept: &accept})        
 		}
 	}
+    //if there is an error then this println will show up
 	if len(nfaStack) != 1 {
-		fmt.Println("oohhh", len(nfaStack), nfaStack)
+		fmt.Println("error", len(nfaStack), nfaStack)
 	}
 	return nfaStack[0]
 }
-
+//add state function
 func addState (l []*state, s *state, a *state) []*state{
     l = append(l, s)
 
@@ -78,7 +80,7 @@ func addState (l []*state, s *state, a *state) []*state{
     }
     return l
 }
-
+//postfix match function to match the strings
 func Pomatch (po string, s string)bool{
     ismatch := false
     ponfa := poregtonfa(po)
@@ -87,7 +89,7 @@ func Pomatch (po string, s string)bool{
     next := []*state{}
 
     current = addState(current[:], ponfa.initial, ponfa.accept)
-
+//for loop within a for loop
     for _, r := range s{
         for _, c := range current{
             if c.symbol == r{
@@ -96,13 +98,14 @@ func Pomatch (po string, s string)bool{
         }
         current, next = next, []*state{}
     }
-
+//for loop to see if the boolean is true
     for _, c := range current{
         if c == ponfa.accept{
             ismatch = true
             break
         }
     }
+    //returning the ismatch boolean
     return ismatch
 }
 
